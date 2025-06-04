@@ -3,7 +3,7 @@ pygame.init()
 
 WIDTH = 600
 HEIGHT = 600
-screen = pygame.display.set_mode((600,600))
+screen = pygame.display.set_mode((WIDTH,HEIGHT))
 screen.fill((255,23,255))
 pygame.display.update()
 pygame.display.set_caption("my own rocket")
@@ -35,3 +35,24 @@ class player(pygame.sprite.Sprite):
 
         if self.rect.bottom>= HEIGHT:
             self.rect.bottom = HEIGHT
+
+
+sprites = pygame.sprite.Group()
+
+def start_game():
+    rocket = player()
+    sprites.add(rocket)
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit(0)
+
+        pressed_keys = pygame.key.get_pressed 
+        rocket.update(pressed_keys)
+        screen.blit(pygame.image.load("space.png"), 0,0)
+        sprites.draw(screen)
+        pygame.display.update()
+
+start_game()          
